@@ -21,6 +21,9 @@
     "react-dom": "^18.3.0",
     "recharts": "^3.9.0"
   },
+  "optionalDependencies": {
+    "@next/swc-linux-x64-gnu": "^14.2.35"
+  },
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/react": "^18.3.0",
