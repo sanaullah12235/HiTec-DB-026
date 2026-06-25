@@ -2,7 +2,7 @@
 
 import { createClient } from '@/lib/supabase/client';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import {
   GraduationCap, Mail, Lock, ArrowRight, AlertCircle, Sparkles,
@@ -20,7 +20,7 @@ const roleOptions: { role: RoleOption; label: string; icon: typeof GraduationCap
   { role: 'librarian', label: 'Librarian', icon: BookOpen, gradient: 'from-amber-500 to-amber-600', description: 'Library & circulation' },
 ];
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -262,5 +262,13 @@ export default function LoginPage() {
 
       </motion.div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }
