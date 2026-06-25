@@ -1,0 +1,18 @@
+{
+  "name": "hisup",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @hisup/web",
+    "build": "npm run build -w @hisup/web",
+    "lint": "npm run lint -w @hisup/web",
+    "test": "npm run test -w @hisup/config",
+    "test:ui": "npm run test:ui -w @hisup/config"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.8.2"
+}
