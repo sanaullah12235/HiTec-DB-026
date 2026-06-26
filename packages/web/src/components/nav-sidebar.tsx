@@ -162,11 +162,11 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
   return (
     <>
       <button
-        className="fixed left-4 top-3 z-50 rounded-xl border border-white/10 bg-gray-900/80 p-2.5 shadow-lg backdrop-blur-md lg:hidden"
+        className="fixed left-4 top-3 z-50 rounded-xl border border-[var(--sidebar-border)] bg-[var(--sidebar-bg)] p-2.5 shadow-lg backdrop-blur-md lg:hidden"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle navigation"
       >
-        {mobileOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />}
+        {mobileOpen ? <X className="h-5 w-5 text-[var(--sidebar-text)]" /> : <Menu className="h-5 w-5 text-[var(--sidebar-text)]" />}
       </button>
 
       {mobileOpen && (
@@ -174,13 +174,13 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-[var(--sidebar-mobile-overlay)] backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-white/[0.06] bg-gray-950/95 backdrop-blur-xl transition-all duration-300 lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-[var(--sidebar-border)] bg-[var(--sidebar-bg)]/95 backdrop-blur-xl transition-all duration-300 lg:static lg:translate-x-0 ${
           sidebarWidth
         } ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
@@ -188,7 +188,7 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
       >
         {/* Header with collapse button */}
         <div className={`flex items-center bg-gradient-to-r ${config.gradient} px-4 py-5 ${collapsed ? 'justify-center' : 'gap-3'}`}>
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/20 shadow-lg shadow-black/20">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--sidebar-icon-bg)] shadow-lg">
             <GraduationCap className="h-5 w-5 text-white" />
           </div>
           {!collapsed && (
@@ -199,7 +199,7 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
           )}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="hidden shrink-0 rounded-lg border border-white/20 bg-white/10 p-1.5 text-white/70 transition-all duration-200 hover:bg-white/20 hover:text-white hover:scale-105 lg:flex"
+            className="hidden shrink-0 rounded-lg border border-[var(--sidebar-collapse-btn-border)] bg-[var(--sidebar-collapse-btn-bg)] p-1.5 text-[var(--sidebar-collapse-btn-text)] transition-all duration-200 hover:bg-[var(--sidebar-collapse-btn-hover-bg)] hover:text-[var(--sidebar-collapse-btn-hover-text)] hover:scale-105 lg:flex"
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {collapsed ? <ChevronRight className="h-3.5 w-3.5" /> : <ChevronLeft className="h-3.5 w-3.5" />}
@@ -225,7 +225,7 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
                     } ${
                       active
                         ? `${config.activeBg} ${config.activeText} shadow-sm`
-                        : 'text-gray-500 hover:bg-white/[0.04] hover:text-gray-300'
+                        : 'text-[var(--sidebar-text)] hover:bg-[var(--sidebar-hover-bg)] hover:text-[var(--sidebar-text-hover)]'
                     }`}
                     onClick={() => setMobileOpen(false)}
                     title={collapsed ? item.label : undefined}
@@ -237,7 +237,7 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
                       />
                     )}
                     {active && collapsed && (
-                      <span className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/15" />
+                      <span className="absolute inset-0 rounded-xl ring-1 ring-inset ring-[var(--sidebar-active-ring)]" />
                     )}
                     <span className={`${active ? '' : 'opacity-70 group-hover:opacity-100'} transition-opacity`}>
                       {item.icon}
@@ -251,15 +251,15 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
         </div>
 
         {/* User menu */}
-        <div className={`border-t border-white/[0.06] px-3 py-3 ${collapsed ? 'text-center' : ''}`}>
+        <div className={`border-t border-[var(--sidebar-border)] px-3 py-3 ${collapsed ? 'text-center' : ''}`}>
           {collapsed ? (
             <div className="flex flex-col items-center gap-2">
-              <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br ${config.gradient} text-xs font-bold text-white shadow-lg shadow-black/20`}>
+              <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br ${config.gradient} text-xs font-bold text-white shadow-lg`}>
                 {getInitials(userName)}
               </div>
               <button
                 onClick={handleSignOut}
-                className="rounded-lg p-2 text-red-400/50 transition-all duration-200 hover:bg-white/[0.04] hover:text-red-400"
+                className="rounded-lg p-2 text-[var(--sidebar-signout)] transition-all duration-200 hover:bg-[var(--sidebar-hover-bg)] hover:text-[var(--sidebar-signout-hover)]"
                 title="Sign out"
               >
                 <LogOut className="h-4 w-4" />
@@ -267,16 +267,16 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${config.gradient} text-xs font-bold text-white shadow-lg shadow-black/20`}>
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${config.gradient} text-xs font-bold text-white shadow-lg`}>
                 {getInitials(userName)}
               </div>
               <div className="flex-1 overflow-hidden">
-                <p className="truncate text-sm font-medium text-gray-200">{userName}</p>
-                <p className="truncate text-xs text-gray-500 capitalize font-medium">{config.label} Portal</p>
+                <p className="truncate text-sm font-medium text-[var(--sidebar-user-text)]">{userName}</p>
+                <p className="truncate text-xs text-[var(--sidebar-user-role)] capitalize font-medium">{config.label} Portal</p>
               </div>
               <button
                 onClick={handleSignOut}
-                className="rounded-lg p-2 text-red-400/50 transition-all duration-200 hover:bg-white/[0.04] hover:text-red-400"
+                className="rounded-lg p-2 text-[var(--sidebar-signout)] transition-all duration-200 hover:bg-[var(--sidebar-hover-bg)] hover:text-[var(--sidebar-signout-hover)]"
                 title="Sign out"
               >
                 <LogOut className="h-4 w-4" />

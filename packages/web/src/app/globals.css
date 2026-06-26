@@ -41,6 +41,23 @@
   --card-border-hover: #d1d5db;
   --icon-badge-bg: rgba(0, 0, 0, 0.05);
   --icon-badge-border: rgba(0, 0, 0, 0.06);
+  --sidebar-bg: #f8fafc;
+  --sidebar-border: rgba(0, 0, 0, 0.06);
+  --sidebar-text: #475569;
+  --sidebar-text-hover: #1e293b;
+  --sidebar-hover-bg: rgba(0, 0, 0, 0.04);
+  --sidebar-active-ring: rgba(0, 0, 0, 0.15);
+  --sidebar-user-text: #1e293b;
+  --sidebar-user-role: #64748b;
+  --sidebar-icon-bg: rgba(255, 255, 255, 0.8);
+  --sidebar-signout: #f87171;
+  --sidebar-signout-hover: #ef4444;
+  --sidebar-mobile-overlay: rgba(0, 0, 0, 0.4);
+  --sidebar-collapse-btn-bg: rgba(0, 0, 0, 0.06);
+  --sidebar-collapse-btn-border: rgba(0, 0, 0, 0.1);
+  --sidebar-collapse-btn-text: #64748b;
+  --sidebar-collapse-btn-hover-bg: rgba(0, 0, 0, 0.1);
+  --sidebar-collapse-btn-hover-text: #1e293b;
 }
 
 :root.dark {
@@ -80,6 +97,23 @@
   --card-border-hover: rgba(255, 255, 255, 0.2);
   --icon-badge-bg: rgba(255, 255, 255, 0.06);
   --icon-badge-border: rgba(255, 255, 255, 0.1);
+  --sidebar-bg: #0f172a;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-text: #64748b;
+  --sidebar-text-hover: #e2e8f0;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.04);
+  --sidebar-active-ring: rgba(255, 255, 255, 0.15);
+  --sidebar-user-text: #e2e8f0;
+  --sidebar-user-role: #64748b;
+  --sidebar-icon-bg: rgba(255, 255, 255, 0.2);
+  --sidebar-signout: #fca5a5;
+  --sidebar-signout-hover: #f87171;
+  --sidebar-mobile-overlay: rgba(0, 0, 0, 0.6);
+  --sidebar-collapse-btn-bg: rgba(255, 255, 255, 0.1);
+  --sidebar-collapse-btn-border: rgba(255, 255, 255, 0.2);
+  --sidebar-collapse-btn-text: rgba(255, 255, 255, 0.7);
+  --sidebar-collapse-btn-hover-bg: rgba(255, 255, 255, 0.2);
+  --sidebar-collapse-btn-hover-text: #ffffff;
 }
 
 @layer base {
