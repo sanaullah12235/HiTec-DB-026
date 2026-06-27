@@ -235,7 +235,7 @@ export default function LandingPage() {
       {/* ─── Hero Section ─── */}
       <motion.section
         style={{ opacity: heroOpacity, scale: heroScale }}
-        className="relative flex min-h-screen flex-col items-center justify-center px-6"
+        className="relative flex min-h-screen flex-col items-center justify-center px-11"
       >
         <div className="mx-auto w-full max-w-[1200px] text-center">
           <motion.div
