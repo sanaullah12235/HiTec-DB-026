@@ -39,10 +39,20 @@ export default function StudentsPage() {
   async function loadData() {
     setLoading(true);
     const [sRes, pRes] = await Promise.all([
-      supabase.from('students').select('*, programs(name)'),
+      supabase.from('students').select('*'),
       supabase.from('programs').select('id, name'),
     ]);
-    setStudents((sRes.data ?? []) as Student[]);
+    if (sRes.error) {
+      addAlert('error', `Failed to load students: ${sRes.error.message}`);
+      setStudents([]);
+    } else {
+      const programMap = new Map((pRes.data ?? []).map((p) => [p.id, p]));
+      setStudents((sRes.data as Student[] ?? []).map((s) => ({
+        ...s,
+        programs: programMap.get(s.program_id) ? { name: (programMap.get(s.program_id) as { name: string }).name } : undefined,
+      })));
+    }
+    if (pRes.error) addAlert('error', `Failed to load programs: ${pRes.error.message}`);
     setPrograms((pRes.data ?? []) as { id: string; name: string }[]);
     setLoading(false);
   }
