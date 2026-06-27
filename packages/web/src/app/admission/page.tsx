@@ -125,7 +125,7 @@ export default function AdmissionPage() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-lg"
       >
-        <div className="relative rounded-2xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-xl">
+        <div className="relative rounded-2xl border border-white/10 bg-white/[0.06] p-6 sm:p-8 backdrop-blur-xl">
           <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-indigo-400 to-transparent" />
 
           <motion.div

@@ -148,7 +148,7 @@ export default function StudentDashboard() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="group rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-200 hover:-translate-y-0.5"
+            className="group rounded-2xl border border-gray-100 bg-white p-4 sm:p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-200 hover:-translate-y-0.5"
           >
             <div className="flex items-start justify-between">
               <div>
@@ -166,7 +166,7 @@ export default function StudentDashboard() {
 
       {/* Progress Rings Row */}
       <motion.div variants={item} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-200 hover:shadow-md">
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 shadow-sm transition-all duration-200 hover:shadow-md">
           <h3 className="mb-5 text-lg font-semibold text-gray-900">GPA</h3>
           <ProgressRing progress={gpaPercent} color="#6366f1" size={140} strokeWidth={10}>
             <div className="flex flex-col items-center">
@@ -179,7 +179,7 @@ export default function StudentDashboard() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-200 hover:shadow-md">
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 shadow-sm transition-all duration-200 hover:shadow-md">
           <h3 className="mb-5 text-lg font-semibold text-gray-900">Attendance</h3>
           <ProgressRing progress={attendancePct} color="#06b6d4" size={140} strokeWidth={10}>
             <div className="flex flex-col items-center">
@@ -192,7 +192,7 @@ export default function StudentDashboard() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-200 hover:shadow-md">
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 shadow-sm transition-all duration-200 hover:shadow-md">
           <h3 className="mb-5 text-lg font-semibold text-gray-900">Courses</h3>
           <ProgressRing progress={totalCourses > 0 ? Math.min((totalCourses / 7) * 100, 100) : 0} color="#8b5cf6" size={140} strokeWidth={10}>
             <div className="flex flex-col items-center">
@@ -209,7 +209,7 @@ export default function StudentDashboard() {
       {/* Enrollments Table */}
       <motion.div variants={item}>
         <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
-          <div className="flex items-center gap-3 border-b border-gray-50 px-6 py-4">
+          <div className="flex items-center gap-3 border-b border-gray-50 px-4 sm:px-6 py-4">
             <div className="rounded-lg bg-gradient-to-br from-indigo-500/10 to-indigo-600/5 p-2">
               <BookOpen className="h-5 w-5 text-indigo-600" />
             </div>

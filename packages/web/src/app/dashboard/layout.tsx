@@ -15,9 +15,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const displayName = user.user_metadata?.full_name ?? user.email ?? 'User';
 
   return (
-    <div className="flex min-h-screen bg-[var(--bg-page)]">
+    <div className="flex min-h-screen bg-[var(--bg-page)] overflow-hidden">
       <NavSidebar role={role} userName={displayName} />
-      <div className="flex flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col">
         {/* Top header bar */}
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[var(--border-nav)] bg-[var(--nav-bg)] px-6 backdrop-blur-xl lg:px-8">
           <div className="flex items-center gap-3">

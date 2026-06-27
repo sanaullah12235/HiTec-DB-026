@@ -27,7 +27,7 @@ export default async function LibrarianDashboard() {
 
       {/* Stats */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="animate-fade-up animate-delay-100 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+        <div className="animate-fade-up animate-delay-100 rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-500">Total Books</p>
@@ -40,7 +40,7 @@ export default async function LibrarianDashboard() {
           </div>
         </div>
 
-        <div className="animate-fade-up animate-delay-200 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+        <div className="animate-fade-up animate-delay-200 rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-500">Active Issues</p>
@@ -53,7 +53,7 @@ export default async function LibrarianDashboard() {
           </div>
         </div>
 
-        <div className="animate-fade-up animate-delay-300 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+        <div className="animate-fade-up animate-delay-300 rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-500">Overdue Items</p>
@@ -73,23 +73,23 @@ export default async function LibrarianDashboard() {
 
       {/* Search + Quick actions */}
       <div className="animate-fade-up animate-delay-300 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+        <div className="rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all">
           <div className="mb-4 flex items-center gap-2">
             <Search className="h-5 w-5 text-amber-500" />
             <h3 className="text-sm font-semibold text-gray-900">Quick Search</h3>
           </div>
           <form action="/dashboard/librarian/inventory" method="GET" className="flex gap-2">
-            <div className="relative flex-1">
+            <div className="relative flex-1 min-w-0">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
               <input
                 name="q"
-                placeholder="Search books by title, author or ISBN..."
+                placeholder="Search by title, author or ISBN..."
                 className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 pl-10 pr-4 text-sm shadow-sm transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 placeholder:text-gray-400"
               />
             </div>
             <button
               type="submit"
-              className="rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:from-amber-400 hover:to-amber-500 hover:shadow-xl"
+              className="rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-4 sm:px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:from-amber-400 hover:to-amber-500 hover:shadow-xl"
             >
               Search
             </button>
@@ -97,7 +97,7 @@ export default async function LibrarianDashboard() {
         </div>
 
         <a href="/dashboard/librarian/inventory" className="animate-fade-up animate-delay-400 group">
-          <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all flex h-full items-center justify-between">
+          <div className="rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all flex h-full items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-900">Browse Full Inventory</p>
               <p className="mt-0.5 text-xs text-gray-500">Manage catalog, add new books</p>
@@ -110,7 +110,7 @@ export default async function LibrarianDashboard() {
       {/* Recent Circulation */}
       <div className="animate-fade-up animate-delay-400">
         <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-          <div className="flex items-center gap-2 border-b border-gray-100 px-6 py-4">
+          <div className="flex items-center gap-2 border-b border-gray-100 px-4 sm:px-6 py-4">
             <BookMarked className="h-5 w-5 text-amber-500" />
             <h2 className="text-lg font-semibold text-gray-900">Recent Circulation</h2>
           </div>

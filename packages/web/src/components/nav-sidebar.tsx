@@ -180,7 +180,7 @@ export function NavSidebar({ role, userName }: { role: Role; userName: string })
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-[var(--sidebar-border)] bg-[var(--sidebar-bg)]/95 backdrop-blur-xl transition-all duration-300 lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex max-h-screen flex-col border-r border-[var(--sidebar-border)] bg-[var(--sidebar-bg)]/95 backdrop-blur-xl transition-all duration-300 lg:static lg:translate-x-0 ${
           sidebarWidth
         } ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'

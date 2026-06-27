@@ -34,6 +34,7 @@ export function DataTable<T extends Record<string, unknown>>({
 
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 shadow-sm">
+      <div className="overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-100 text-sm">
         <thead className="bg-gray-50/80">
           <tr>
@@ -62,6 +63,7 @@ export function DataTable<T extends Record<string, unknown>>({
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

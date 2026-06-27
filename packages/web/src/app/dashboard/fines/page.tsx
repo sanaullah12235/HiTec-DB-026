@@ -108,7 +108,7 @@ export default function FinesOverviewPage() {
 
       {/* Stats */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="animate-fade-up animate-delay-100 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+        <div className="animate-fade-up animate-delay-100 rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-500">Overdue Items</p>
@@ -120,7 +120,7 @@ export default function FinesOverviewPage() {
           </div>
         </div>
 
-        <div className="animate-fade-up animate-delay-200 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+        <div className="animate-fade-up animate-delay-200 rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-500">Unpaid Fines</p>
@@ -132,7 +132,7 @@ export default function FinesOverviewPage() {
           </div>
         </div>
 
-        <div className="animate-fade-up animate-delay-300 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+        <div className="animate-fade-up animate-delay-300 rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-500">Total Outstanding</p>
@@ -148,7 +148,7 @@ export default function FinesOverviewPage() {
       {/* Fines Table */}
       <div className="animate-fade-up animate-delay-400">
         <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-          <div className="flex items-center gap-2 border-b border-gray-100 px-6 py-4">
+          <div className="flex items-center gap-2 border-b border-gray-100 px-4 sm:px-6 py-4">
             <DollarSign className="h-5 w-5 text-amber-500" />
             <h2 className="text-lg font-semibold text-gray-900">All Fines</h2>
           </div>

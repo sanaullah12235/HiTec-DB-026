@@ -23,7 +23,7 @@ export function AnimatedCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}
       whileHover={hover ? { scale: 1.02, y: -4, transition: { duration: 0.2 } } : undefined}
-      className={`rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow ${glowColor ? `hover:shadow-[0_0_30px_${glowColor}20]` : 'hover:shadow-md'} ${className}`}
+      className={`rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm transition-shadow ${glowColor ? `hover:shadow-[0_0_30px_${glowColor}20]` : 'hover:shadow-md'} ${className}`}
     >
       {children}
     </motion.div>

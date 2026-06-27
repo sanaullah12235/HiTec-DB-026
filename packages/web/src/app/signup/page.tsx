@@ -59,7 +59,7 @@ export default function SignupPage() {
           animate={{ opacity: 1, scale: 1 }}
           className="relative w-full max-w-sm"
         >
-          <div className="relative rounded-2xl border border-white/10 bg-white/[0.06] p-8 text-center backdrop-blur-xl">
+          <div className="relative rounded-2xl border border-white/10 bg-white/[0.06] p-6 sm:p-8 text-center backdrop-blur-xl">
             <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-indigo-400 to-transparent" />
             <motion.div
               initial={{ scale: 0 }}
@@ -113,7 +113,7 @@ export default function SignupPage() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-md"
       >
-        <div className="relative rounded-2xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-xl">
+          <div className="relative rounded-2xl border border-white/10 bg-white/[0.06] p-6 sm:p-8 backdrop-blur-xl">
           <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-indigo-400 to-transparent" />
 
           <motion.div

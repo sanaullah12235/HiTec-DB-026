@@ -124,6 +124,7 @@
   body {
     @apply bg-[var(--bg-page)] text-[var(--text-body)] antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
   }
 
   ::selection {

@@ -56,7 +56,7 @@ export default async function AdminDashboard() {
           { label: 'Active Courses', value: courseCount, icon: BookOpen, color: '#10b981', cls: 'animate-fade-up animate-delay-400' },
           { label: 'Sections', value: sectionCount, icon: LayoutGrid, color: '#ec4899', cls: 'animate-fade-up animate-delay-500' },
         ].map((stat) => (
-          <div key={stat.label} className={`rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all p-5 ${stat.cls}`}>
+          <div key={stat.label} className={`rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all p-4 sm:p-5 ${stat.cls}`}>
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">{stat.label}</p>
@@ -76,7 +76,7 @@ export default async function AdminDashboard() {
         </div>
 
         <div className="lg:col-span-2 animate-fade-up animate-delay-300">
-          <div className="rounded-2xl border border-gray-100 bg-white shadow-sm h-full p-6">
+          <div className="rounded-2xl border border-gray-100 bg-white shadow-sm h-full p-4 sm:p-6">
             <div className="mb-4 flex items-center gap-2">
               <ScrollText className="h-5 w-5 text-blue-500" />
               <h3 className="text-lg font-semibold text-gray-900">System Audit & Logs</h3>

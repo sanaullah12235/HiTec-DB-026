@@ -145,10 +145,10 @@ export default function LandingPage() {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(var(--grid-color)_1px,transparent_1px),linear-gradient(90deg,var(--grid-color)_1px,transparent_1px)] bg-[size:64px_64px]" />
         {/* Large floating blobs */}
-        <div className="absolute top-1/4 left-[15%] h-[500px] w-[500px] animate-float rounded-full bg-blue-500/10 blur-[120px]" />
-        <div className="absolute top-1/3 right-[15%] h-[400px] w-[400px] animate-float rounded-full bg-indigo-500/10 blur-[120px]" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-1/4 left-1/3 h-[350px] w-[350px] animate-float rounded-full bg-teal-500/10 blur-[120px]" style={{ animationDelay: '4s' }} />
-        <div className="absolute top-2/3 right-1/4 h-[300px] w-[300px] animate-float rounded-full bg-amber-500/8 blur-[100px]" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-1/4 left-[15%] max-md:h-[250px] max-md:w-[250px] h-[500px] w-[500px] animate-float rounded-full bg-blue-500/10 blur-[120px]" />
+        <div className="absolute top-1/3 right-[15%] max-md:h-[200px] max-md:w-[200px] h-[400px] w-[400px] animate-float rounded-full bg-indigo-500/10 blur-[120px]" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-1/4 left-1/3 max-md:h-[180px] max-md:w-[180px] h-[350px] w-[350px] animate-float rounded-full bg-teal-500/10 blur-[120px]" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-2/3 right-1/4 max-md:h-[150px] max-md:w-[150px] h-[300px] w-[300px] animate-float rounded-full bg-amber-500/8 blur-[100px]" style={{ animationDelay: '3s' }} />
       </div>
 
       {/* ─── Navigation ─── */}
