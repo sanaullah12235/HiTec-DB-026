@@ -6,6 +6,7 @@ import { ok, fromError } from '@/lib/api-response';
 
 type DbClient = {
   from: (table: string) => {
+    insert: (data: Record<string, unknown>) => { select: () => { single: () => Promise<{ data: unknown; error: unknown }> } };
     update: (data: Record<string, unknown>) => { eq: (col: string, val: string) => Promise<{ error: unknown }> };
     select: (cols?: string) => {
       eq: (col: string, val: string) => {
@@ -39,6 +40,14 @@ export async function POST(request: NextRequest) {
     const dueDate = new Date(issue.due_date);
     const daysOverdue = Math.max(0, Math.floor((new Date().getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24)));
     const fine = daysOverdue * 50;
+
+    if (fine > 0) {
+      await supabase.from('library_fines').insert({
+        issue_id,
+        amount: fine,
+        days_overdue: daysOverdue,
+      });
+    }
 
     return ok({ message: 'Returned successfully.', fine, daysOverdue });
   } catch (error) {

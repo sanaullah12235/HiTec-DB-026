@@ -112,8 +112,12 @@ export default function CirculationPage() {
     if (error) { addAlert('error', error.message); return; }
     await supabase.from('library_items').update({ available_copies: (foundIssue.library_items?.available_copies ?? 0) + 1 }).eq('id', foundIssue.item_id);
 
-    if (fine > 0) addAlert('warning', `Returned. Fine: PKR ${fine} (${daysOverdue} days overdue @ PKR 50/day)`);
-    else addAlert('success', 'Book returned on time. No fine.');
+    if (fine > 0) {
+      await supabase.from('library_fines').insert({ issue_id: foundIssue.id, amount: fine, days_overdue: daysOverdue });
+      addAlert('warning', `Returned. Fine: PKR ${fine} (${daysOverdue} days overdue @ PKR 50/day)`);
+    } else {
+      addAlert('success', 'Book returned on time. No fine.');
+    }
     setFoundIssue(null); setIssueId(''); setReturnIsbn(''); setReturnStudent(null); setReturnStudentSearch('');
   }
 

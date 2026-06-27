@@ -10,75 +10,63 @@ import { PageSpinner } from '@/components/ui/spinner';
 import { createClient } from '@/lib/supabase/client';
 import { DollarSign, BookOpen, AlertTriangle } from 'lucide-react';
 
-interface LibraryIssue {
+interface FineRecord {
   id: string;
-  student_id: string;
-  issued_at: string;
-  due_date: string;
-  returned_at: string | null;
-  status: string;
-  fine_paid: boolean;
-  library_items: { title: string; author: string };
-  students: { name: string; email: string };
+  issue_id: string;
+  amount: number;
+  days_overdue: number;
+  paid: boolean;
+  paid_at: string | null;
+  created_at: string;
+  library_issues: {
+    issued_at: string;
+    due_date: string;
+    returned_at: string | null;
+    status: string;
+    students: { name: string; email: string };
+    library_items: { title: string; author: string };
+  };
 }
 
 export default function LibrarianFinesPage() {
   const supabase = createClient();
-  const [issues, setIssues] = useState<LibraryIssue[]>([]);
+  const [fines, setFines] = useState<FineRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [alerts, setAlerts] = useState<{ id: string; variant?: 'info' | 'success' | 'warning' | 'error'; message: string }[]>([]);
   const [payingId, setPayingId] = useState<string | null>(null);
 
   useEffect(() => {
-    loadIssues();
+    loadFines();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function loadIssues() {
+  async function loadFines() {
     setLoading(true);
     const { data } = await supabase
-      .from('library_issues')
-      .select('*, library_items(title, author), students(name, email)')
-      .order('issued_at', { ascending: false });
-    setIssues(data as LibraryIssue[] ?? []);
+      .from('library_fines')
+      .select('*, library_issues!inner(issued_at, due_date, returned_at, status, students!inner(name, email), library_items!inner(title, author))')
+      .order('created_at', { ascending: false });
+    setFines(data as FineRecord[] ?? []);
     setLoading(false);
-  }
-
-  function calcFine(issue: LibraryIssue): number {
-    const due = new Date(issue.due_date);
-    const end = issue.returned_at ? new Date(issue.returned_at) : new Date();
-    if (end > due) {
-      return Math.floor((end.getTime() - due.getTime()) / (1000 * 60 * 60 * 24)) * 50;
-    }
-    return 0;
-  }
-
-  function daysOverdue(issue: LibraryIssue): number {
-    const due = new Date(issue.due_date);
-    const end = issue.returned_at ? new Date(issue.returned_at) : new Date();
-    if (end > due) {
-      return Math.floor((end.getTime() - due.getTime()) / (1000 * 60 * 60 * 24));
-    }
-    return 0;
   }
 
   async function markPaid(id: string) {
     setPayingId(id);
     const { error } = await supabase
-      .from('library_issues')
-      .update({ fine_paid: true })
+      .from('library_fines')
+      .update({ paid: true, paid_at: new Date().toISOString() })
       .eq('id', id);
     if (error) {
       setAlerts([{ id: 'error', variant: 'error', message: error.message }]);
     } else {
       setAlerts([{ id: 'success', variant: 'success', message: 'Fine marked as paid.' }]);
-      loadIssues();
+      loadFines();
     }
     setPayingId(null);
   }
 
-  const outstandingTotal = issues
-    .filter((i) => i.status === 'issued' && !i.fine_paid)
-    .reduce((sum, i) => sum + calcFine(i), 0);
+  const outstandingTotal = fines
+    .filter((f) => !f.paid)
+    .reduce((sum, f) => sum + f.amount, 0);
 
   if (loading) return <PageSpinner />;
 
@@ -99,13 +87,11 @@ export default function LibrarianFinesPage() {
         <div className="animate-fade-up animate-delay-100 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-semibold text-gray-500">Overdue Items</p>
-              <p className="mt-1 text-3xl font-bold text-red-600">
-                {issues.filter((i) => i.status === 'issued' && new Date(i.due_date) < new Date()).length}
-              </p>
+              <p className="text-sm font-semibold text-gray-500">Recorded Fines</p>
+              <p className="mt-1 text-3xl font-bold text-amber-600">{fines.length}</p>
             </div>
-            <div className="rounded-xl bg-red-500/10 p-3">
-              <AlertTriangle className="h-5 w-5 text-red-500" />
+            <div className="rounded-xl bg-amber-500/10 p-3">
+              <BookOpen className="h-5 w-5 text-amber-500" />
             </div>
           </div>
         </div>
@@ -115,11 +101,11 @@ export default function LibrarianFinesPage() {
             <div>
               <p className="text-sm font-semibold text-gray-500">Unpaid Fines</p>
               <p className="mt-1 text-3xl font-bold text-amber-600">
-                {issues.filter((i) => !i.fine_paid && calcFine(i) > 0).length}
+                {fines.filter((f) => !f.paid).length}
               </p>
             </div>
             <div className="rounded-xl bg-amber-500/10 p-3">
-              <BookOpen className="h-5 w-5 text-amber-500" />
+              <AlertTriangle className="h-5 w-5 text-amber-500" />
             </div>
           </div>
         </div>
@@ -142,53 +128,60 @@ export default function LibrarianFinesPage() {
         <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
           <div className="flex items-center gap-2 border-b border-gray-100 px-6 py-4">
             <DollarSign className="h-5 w-5 text-amber-500" />
-            <h2 className="text-lg font-semibold text-gray-900">All Issues & Fines</h2>
+            <h2 className="text-lg font-semibold text-gray-900">Fines Record</h2>
           </div>
           <div className="p-1">
             <DataTable
               columns={[
-                { key: 'student', header: 'Student', render: (r) => (r.students as Record<string, unknown>)?.name as string ?? '-' },
-                { key: 'book', header: 'Book', render: (r) => (r.library_items as Record<string, unknown>)?.title as string ?? '-' },
-                { key: 'issued', header: 'Issued', render: (r) => new Date(r.issued_at as string).toLocaleDateString() },
-                { key: 'due', header: 'Due', render: (r) => new Date(r.due_date as string).toLocaleDateString() },
-                { key: 'status', header: 'Status', render: (r) => {
-                  const s = r.status as string;
-                  const overdue = s === 'issued' && new Date(r.due_date as string) < new Date();
-                  return <Badge variant={s === 'returned' ? 'success' : overdue ? 'error' : 'info'}>{overdue ? 'overdue' : s}</Badge>;
+                { key: 'student', header: 'Student', render: (r) => {
+                  const li = r.library_issues as Record<string, unknown> | undefined;
+                  const s = li?.students as Record<string, unknown> | undefined;
+                  return (s?.name as string) ?? '-';
                 }},
-                { key: 'days_overdue', header: 'Days Overdue', render: (r) => {
-                  const issue = r as unknown as LibraryIssue;
-                  const d = daysOverdue(issue);
-                  return d > 0 ? <span className="font-medium text-red-600">{d}d</span> : <span className="text-gray-400">-</span>;
+                { key: 'book', header: 'Book', render: (r) => {
+                  const li = r.library_issues as Record<string, unknown> | undefined;
+                  const lib = li?.library_items as Record<string, unknown> | undefined;
+                  return (lib?.title as string) ?? '-';
                 }},
-                { key: 'fine', header: 'Fine (PKR)', render: (r) => {
-                  const issue = r as unknown as LibraryIssue;
-                  const fine = calcFine(issue);
-                  return fine > 0 ? <span className="font-medium text-red-600">{fine.toLocaleString()}</span> : <span className="text-gray-400">0</span>;
+                { key: 'due', header: 'Due Date', render: (r) => {
+                  const li = r.library_issues as Record<string, unknown> | undefined;
+                  return new Date(li?.due_date as string).toLocaleDateString();
                 }},
-                { key: 'fine_paid', header: 'Fine Paid', render: (r) => {
-                  const fp = r.fine_paid as boolean;
-                  return fp ? <Badge variant="success">Paid</Badge> : <Badge variant="error">Unpaid</Badge>;
+                { key: 'returned', header: 'Returned', render: (r) => {
+                  const li = r.library_issues as Record<string, unknown> | undefined;
+                  const returned = li?.returned_at as string | null | undefined;
+                  return returned ? new Date(returned).toLocaleDateString() : '-';
+                }},
+                { key: 'days', header: 'Days Overdue', render: (r) => {
+                  const f = r as unknown as FineRecord;
+                  return <span className="font-medium text-red-600">{f.days_overdue}d</span>;
+                }},
+                { key: 'amount', header: 'Fine (PKR)', render: (r) => {
+                  const f = r as unknown as FineRecord;
+                  return <span className="font-medium text-red-600">{f.amount.toLocaleString()}</span>;
+                }},
+                { key: 'paid', header: 'Status', render: (r) => {
+                  const f = r as unknown as FineRecord;
+                  return f.paid ? <Badge variant="success">Paid</Badge> : <Badge variant="error">Unpaid</Badge>;
                 }},
                 { key: 'actions', header: 'Actions', render: (r) => {
-                  const issue = r as unknown as LibraryIssue;
-                  const fine = calcFine(issue);
-                  if (issue.fine_paid || fine === 0) return <span className="text-xs text-gray-400">-</span>;
+                  const f = r as unknown as FineRecord;
+                  if (f.paid) return <span className="text-xs text-gray-400">-</span>;
                   return (
                     <Button
                       variant="primary"
                       size="sm"
-                      loading={payingId === issue.id}
-                      onClick={() => markPaid(issue.id)}
+                      loading={payingId === f.id}
+                      onClick={() => markPaid(f.id)}
                     >
                       Mark Paid
                     </Button>
                   );
                 }},
               ]}
-              data={issues as unknown as Record<string, unknown>[]}
-              keyExtractor={(r) => r.id as string}
-              emptyMessage="No library issues found."
+              data={fines as unknown as Record<string, unknown>[]}
+              keyExtractor={(r) => (r as unknown as FineRecord).id}
+              emptyMessage="No fines recorded."
             />
           </div>
         </div>
